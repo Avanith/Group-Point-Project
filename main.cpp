@@ -16,6 +16,7 @@ int main()
 	ifstream in;
 	in.open("points.txt");
 	Bag<Point> pointBag;
+	char yOrN;
 
 	if (!in)
 	{
@@ -36,40 +37,47 @@ int main()
 		in >> x >> y;
 	} // end while
 
+
 	// Creating a vector to clone pointBag.
 	vector<Point> vectorPointBag = pointBag.toVector();
 
-	std::cout << "Guess a pair of x and y coordinates to see if the bag contains it (enter an x, then a y int from 0-2): \n";
-	std::cout << "Correct guesses will remove the pair from the bag. The loop will end when there are no pairs left.\n";
-	cin >> guessX >> guessY;
-
-	while (!pointBag.isEmpty())
+	cout << "Do you want to guess for pairs in the bag? [y\\n]\n";
+	cin >> yOrN;
+	if (yOrN == 'y' || yOrN == 'Y')
 	{
-		// Have the user input a pair of coordinates to check against the bag.
-		Point guessPair(guessX, guessY);
+		std::cout << "Guess a pair of x and y coordinates to see if the bag contains it (enter an x, then a y int from 0-2): \n";
+		std::cout << "Correct guesses will remove the pair from the bag. The loop will end when there are no pairs left.\n";
+		cin >> guessX >> guessY;
 
-		if (pointBag.contains(guessPair))
+		while (!pointBag.isEmpty())
 		{
-			std::cout << "The pair: ";
-			guessPair.display();
-			std::cout << " is in the bag.\n";
-			pointBag.remove(guessPair);
-			if (pointBag.isEmpty())
+			// Have the user input a pair of coordinates to check against the bag.
+			Point guessPair(guessX, guessY);
+
+			if (pointBag.contains(guessPair))
+			{
+				std::cout << "The pair: ";
+				guessPair.display();
+				std::cout << " is in the bag.\n";
+				pointBag.remove(guessPair);
+				cout << "There are " << pointBag.getCurrentSize() << " pairs left.\n";
+				if (pointBag.isEmpty())
+					break;
+			}
+			else
+			{
+				std::cout << "The pair: ";
+				guessPair.display();
+				std::cout << " is not the bag.\n";
+			} // end if
+
+			std::cout << "Input another pair of coordinates or enter -999 to exit.\n";
+			cin >> guessX;
+			if (guessX == -999)
 				break;
-		}
-		else
-		{
-			std::cout << "The pair: ";
-			guessPair.display();
-			std::cout << " is not the bag.\n";
-		} // end if
-
-		std::cout << "Input another pair of coordinates or enter -999 to exit.\n";
-		cin >> guessX;
-		if (guessX == -999)
-			break;
-		cin >> guessY;
-	} // end while
+			cin >> guessY;
+		} // end while
+	} // end if
 
 	//Displaying the pairs in the pointBag.
 	std::cout << "The contents of the pointBag are: \n";
