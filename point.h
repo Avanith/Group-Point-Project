@@ -38,7 +38,6 @@ public:
 	// The points are unchanged.
 	bool operator==(const Point&) const;
 
-	void playPointGuessGame();
 
 private:
 	int mX, mY;
