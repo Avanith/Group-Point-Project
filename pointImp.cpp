@@ -8,14 +8,10 @@ using namespace std;
 
 	Point::Point() : mX(0), mY(0) //Initializers can only be used with constructors.
 	{
-		//mX = 0;
-		//mY = 0;
 	} // end point default constructor
 
 	Point::Point(int inX, int inY) : mX(inX), mY(inY)
 	{
-		//mX = inX;
-		//mY = inY;
 	} //end point
 
 	void Point::setX(int inX)
