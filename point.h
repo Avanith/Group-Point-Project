@@ -38,6 +38,7 @@ public:
 	// The points are unchanged.
 	bool operator==(const Point&) const;
 
+
 private:
 	int mX, mY;
 }; // end point
