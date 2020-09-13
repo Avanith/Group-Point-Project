@@ -80,7 +80,7 @@ int main()
 	} // end if
 
 	//Displaying the pairs in the pointBag.
-	std::cout << "The contents of the pointBag are: \n";
+	std::cout << "The contents of the pointBag initially were: \n";
 	for (i = 0; i < vectorPointBag.size(); i++)
 	{
 		vectorPointBag[i].display();
