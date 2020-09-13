@@ -15,7 +15,7 @@ template<class ItemType>
 class Bag : public BagInterface<ItemType>
 {
 private:
-	static const int DEFAULT_BAG_SIZE = 6;  
+	static const int DEFAULT_BAG_SIZE = 4;  
 	ItemType items[DEFAULT_BAG_SIZE]; // array of bag items
    int itemCount;                    // current count of bag items 
    int maxItems;                     // max capacity of the bag
