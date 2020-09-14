@@ -10,6 +10,8 @@
 
 using namespace std;
 
+int get_user_input();
+
 int main()
 {
 	int x, y, i, guessX, guessY;
@@ -45,9 +47,11 @@ int main()
 	cin >> yOrN;
 	if (yOrN == 'y' || yOrN == 'Y')
 	{
+
 		std::cout << "Guess a pair of x and y coordinates to see if the bag contains it (enter an x, then a y int from 0-2): \n";
 		std::cout << "Correct guesses will remove the pair from the bag. The loop will end when there are no pairs left.\n";
-		cin >> guessX >> guessY;
+		guessX = get_user_input();
+		guessY = get_user_input();
 
 		while (!pointBag.isEmpty())
 		{
@@ -71,11 +75,19 @@ int main()
 				std::cout << " is not the bag.\n";
 			} // end if
 
-			std::cout << "Input another pair of coordinates or enter -999 to exit.\n";
-			cin >> guessX;
+			std::cout << "Do you want to try again?\n";
+			cin >> yOrN;
+			if (yOrN == 'N' || yOrN == 'n')
+				break;
+
+			std::cout << "Input another pair of coordinates.\n";
+			guessX = get_user_input();
 			if (guessX == -999)
 				break;
-			cin >> guessY;
+			guessY = get_user_input();
+			if (guessY == -999)
+				break;
+
 		} // end while
 	} // end if
 
@@ -90,3 +102,20 @@ int main()
 	return 0;
 } // end main
 
+int get_user_input() {
+	while (true) {
+		std::cout << "> ";
+		int guess{};
+		std::cin >> guess;
+
+		if (std::cin.fail()) {
+			std::cin.clear();
+			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+			cout << "Invalid input.\n";
+		}
+		else {
+			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+			return guess;
+		}
+	}
+}
