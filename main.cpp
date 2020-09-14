@@ -50,11 +50,17 @@ int main()
 
 		std::cout << "Guess a pair of x and y coordinates to see if the bag contains it (enter an x, then a y int from 0-2): \n";
 		std::cout << "Correct guesses will remove the pair from the bag. The loop will end when there are no pairs left.\n";
-		guessX = get_user_input();
-		guessY = get_user_input();
 
 		while (!pointBag.isEmpty())
 		{
+			std::cout << "Input another pair of coordinates or enter -999 to exit.\n";
+			guessX = get_user_input();
+			if (guessX == -999)
+				break;
+			guessY = get_user_input();
+			if (guessY == -999)
+				break;
+
 			// Have the user input a pair of coordinates to check against the bag.
 			Point guessPair(guessX, guessY);
 
@@ -74,19 +80,6 @@ int main()
 				guessPair.display();
 				std::cout << " is not the bag.\n";
 			} // end if
-
-			std::cout << "Do you want to try again?\n";
-			cin >> yOrN;
-			if (yOrN == 'N' || yOrN == 'n')
-				break;
-
-			std::cout << "Input another pair of coordinates.\n";
-			guessX = get_user_input();
-			if (guessX == -999)
-				break;
-			guessY = get_user_input();
-			if (guessY == -999)
-				break;
 
 		} // end while
 	} // end if
