@@ -10,6 +10,9 @@
 
 using namespace std;
 
+// Input: Gets an integer from user and makes sure it's an integer.
+// Output: None.
+// Post-condition: returns the integer that was input from the user.
 int get_user_input();
 
 int main()
@@ -23,7 +26,7 @@ int main()
 	if (!in)
 	{
 		std::cout << "Error opening file.\n";
-		return 1;
+		return -1;
 	} // end if
 
 	in >> x >> y;
@@ -41,6 +44,7 @@ int main()
 
 
 	// Creating a vector to clone pointBag.
+	// We create this here before the guessing game because correctly guessed points remove points from the bag.
 	vector<Point> vectorPointBag = pointBag.toVector();
 
 	cout << "Do you want to guess for pairs in the bag? [y\\n]\n";
