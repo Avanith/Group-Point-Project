@@ -10,6 +10,11 @@
 
 using namespace std;
 
+// Input: Gets an integer from user and makes sure it's an integer.
+// Output: None.
+// Post-condition: returns the integer that was input from the user.
+int get_user_input();
+
 int main()
 {
 	int x, y, i, guessX, guessY;
@@ -21,7 +26,7 @@ int main()
 	if (!in)
 	{
 		std::cout << "Error opening file.\n";
-		return 1;
+		return -1;
 	} // end if
 
 	in >> x >> y;
@@ -39,18 +44,27 @@ int main()
 
 
 	// Creating a vector to clone pointBag.
+	// We create this here before the guessing game because correctly guessed points remove points from the bag.
 	vector<Point> vectorPointBag = pointBag.toVector();
 
 	cout << "Do you want to guess for pairs in the bag? [y\\n]\n";
 	cin >> yOrN;
 	if (yOrN == 'y' || yOrN == 'Y')
 	{
+
 		std::cout << "Guess a pair of x and y coordinates to see if the bag contains it (enter an x, then a y int from 0-2): \n";
 		std::cout << "Correct guesses will remove the pair from the bag. The loop will end when there are no pairs left.\n";
-		cin >> guessX >> guessY;
 
 		while (!pointBag.isEmpty())
 		{
+			std::cout << "Input another pair of coordinates or enter -999 to exit.\n";
+			guessX = get_user_input();
+			if (guessX == -999)
+				break;
+			guessY = get_user_input();
+			if (guessY == -999)
+				break;
+
 			// Have the user input a pair of coordinates to check against the bag.
 			Point guessPair(guessX, guessY);
 
@@ -71,11 +85,6 @@ int main()
 				std::cout << " is not the bag.\n";
 			} // end if
 
-			std::cout << "Input another pair of coordinates or enter -999 to exit.\n";
-			cin >> guessX;
-			if (guessX == -999)
-				break;
-			cin >> guessY;
 		} // end while
 	} // end if
 
@@ -90,3 +99,20 @@ int main()
 	return 0;
 } // end main
 
+int get_user_input() {
+	while (true) {
+		std::cout << "> ";
+		int guess{};
+		std::cin >> guess;
+
+		if (std::cin.fail()) {
+			std::cin.clear();
+			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+			cout << "Invalid input.\n";
+		}
+		else {
+			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+			return guess;
+		}
+	}
+}
